@@ -1,27 +1,224 @@
 version: "2.0"
-
 stories:
-
 - story: say ok when user affirms after utter_help
   steps:
   - action: utter_help
   - intent: affirm
   - action: utter_ok
-
 - story: say ok when user affirms after action_show_balance
   steps:
   - action: action_show_balance
   - intent: affirm
   - action: utter_ok
-
 - story: say ok when user affirms after action_show_recipients
   steps:
   - action: action_show_recipients
   - intent: affirm
   - action: utter_ok
-  
 - story: say ok when user affirms after action_show_transfer_charge
   steps:
   - action: action_show_transfer_charge
   - intent: affirm
   - action: utter_ok
+- story: Story from Conversation ID 20b02aedee9d402a906c00f5b1a0d6d5
+  steps:
+  - slot_was_set:
+    - currency: $
+  - intent: greet
+  - action: utter_greet
+  - action: utter_help
+  - intent: check_balance
+    entities:
+    - amount-of-money: current balance
+  - slot_was_set:
+    - amount-of-money: current balance
+  - action: action_show_balance
+  - intent: nlu_fallback
+  - action: utter_default
+  - intent: check_balance
+    entities:
+    - account_type: credit
+    - amount-of-money: current balance
+    - number: 1000
+  - slot_was_set:
+    - account_type: credit
+  - slot_was_set:
+    - amount-of-money: current balance
+  - slot_was_set:
+    - number: 1000
+  - action: action_show_balance
+  - intent: greet
+  - action: utter_greet
+  - action: utter_help
+  - intent: transfer_money
+    entities:
+    - amount-of-money: funds
+  - slot_was_set:
+    - amount-of-money: funds
+  - action: transfer_money_form
+  - active_loop: transfer_money_form
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - amount-of-money: null
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - amount-of-money: null
+  - slot_was_set:
+    - requested_slot: PERSON
+  - intent: check_recipients
+  - action: action_show_recipients
+  - slot_was_set:
+    - AA_CONTINUE_FORM: null
+  - action: transfer_money_form
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - repeated_validation_failures: 1
+  - slot_was_set:
+    - requested_slot: PERSON
+  - intent: inform
+    entities:
+    - PERSON: Evan Oslo
+  - slot_was_set:
+    - PERSON: Evan Oslo
+  - action: transfer_money_form
+  - slot_was_set:
+    - PERSON: Evan Oslo
+  - slot_was_set:
+    - repeated_validation_failures: 0
+  - slot_was_set:
+    - requested_slot: amount-of-money
+  - intent: inform
+    entities:
+    - amount-of-money: 1000
+  - slot_was_set:
+    - amount-of-money: 1000
+  - action: transfer_money_form
+  - slot_was_set:
+    - amount-of-money: '1000.00'
+  - slot_was_set:
+    - currency: £
+  - slot_was_set:
+    - repeated_validation_failures: 0
+  - slot_was_set:
+    - requested_slot: zz_confirm_form
+  - intent: affirm
+  - action: transfer_money_form
+  - slot_was_set:
+    - zz_confirm_form: yes
+  - slot_was_set:
+    - repeated_validation_failures: 0
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_transfer_money
+  - slot_was_set:
+    - AA_CONTINUE_FORM: null
+  - slot_was_set:
+    - zz_confirm_form: null
+  - slot_was_set:
+    - PERSON: null
+  - slot_was_set:
+    - amount-of-money: null
+  - slot_was_set:
+    - number: null
+  - slot_was_set:
+    - amount_transferred: 1000.0
+  - intent: transfer_money
+  - action: transfer_money_form
+  - active_loop: transfer_money_form
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - requested_slot: PERSON
+  - intent: inform
+  - action: transfer_money_form
+  - slot_was_set:
+    - PERSON: null
+  - slot_was_set:
+    - repeated_validation_failures: 1
+  - slot_was_set:
+    - requested_slot: PERSON
+  - intent: nlu_fallback
+  - action: utter_default
+  - action: action_switch_forms_ask
+  - slot_was_set:
+    - next_form_name: null
+  - intent: inform
+  - action: action_switch_forms_ask
+  - slot_was_set:
+    - next_form_name: null
+  - intent: search_transactions
+    entities:
+    - vendor_name: amazon
+    - time: '2020-01-01T00:00:00.000-08:00'
+  - slot_was_set:
+    - time: '2020-01-01T00:00:00.000-08:00'
+  - slot_was_set:
+    - vendor_name: amazon
+  - action: transaction_search_form
+  - active_loop: transaction_search_form
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - time: '2020-01-01T00:00:00.000-08:00'
+  - slot_was_set:
+    - start_time: '2020-01-01T00:00:00.000-08:00'
+  - slot_was_set:
+    - start_time_formatted: '2020'
+  - slot_was_set:
+    - end_time: '2021-01-01T00:00:00-08:00'
+  - slot_was_set:
+    - end_time_formatted: '2021'
+  - slot_was_set:
+    - grain: year
+  - slot_was_set:
+    - search_type: spend
+  - slot_was_set:
+    - time: '2020-01-01T00:00:00.000-08:00'
+  - slot_was_set:
+    - start_time: '2020-01-01T00:00:00.000-08:00'
+  - slot_was_set:
+    - start_time_formatted: '2020'
+  - slot_was_set:
+    - end_time: '2021-01-01T00:00:00-08:00'
+  - slot_was_set:
+    - end_time_formatted: '2021'
+  - slot_was_set:
+    - grain: year
+  - slot_was_set:
+    - requested_slot: zz_confirm_form
+  - intent: affirm
+  - action: transaction_search_form
+  - slot_was_set:
+    - zz_confirm_form: yes
+  - slot_was_set:
+    - repeated_validation_failures: 0
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_transaction_search
+  - slot_was_set:
+    - AA_CONTINUE_FORM: null
+  - slot_was_set:
+    - zz_confirm_form: null
+  - slot_was_set:
+    - time: null
+  - slot_was_set:
+    - time_formatted: null
+  - slot_was_set:
+    - start_time: null
+  - slot_was_set:
+    - end_time: null
+  - slot_was_set:
+    - start_time_formatted: null
+  - slot_was_set:
+    - end_time_formatted: null
+  - slot_was_set:
+    - grain: null
+  - slot_was_set:
+    - search_type: null
+  - slot_was_set:
+    - vendor_name: null
